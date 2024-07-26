@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 from src import CATEGORIES
-from src.transaction import get_expenses, get_incomes
+from src.transaction import get_expenses, get_incomes, get_invests, get_saves
 
 
-def plot_transactions(dataframe):
+def line_transactions(dataframe):
 
     incomes = get_incomes(dataframe)
     expenses = get_expenses(dataframe)
@@ -34,12 +33,18 @@ def plot_transactions(dataframe):
 def pie_transaction(dataframe):
     incomes_df = get_incomes(dataframe)
     expenses_df = get_expenses(dataframe)
+    invests_df = get_invests(dataframe)
+    saves_df = get_saves(dataframe)
 
     incomes = incomes_df["amount"].sum()
     expenses = expenses_df["amount"].sum()
-    print("Amount income : ", type(incomes))
-    labels = CATEGORIES
-    sizes = [incomes, expenses]
+    invests = invests_df["amount"].sum()
+    saves = saves_df["amount"].sum()
 
+    labels = CATEGORIES
+    sizes = [incomes, expenses, invests, saves]
+
+    plt.figure(figsize=(10, 5))
     fig, ax = plt.subplots()
     ax.pie(sizes, labels=labels)
+    plt.show()

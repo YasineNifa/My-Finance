@@ -61,3 +61,9 @@ def get_incomes(dataframe):
 def get_expenses(dataframe):
     return dataframe.loc[dataframe["category"] == "Expense"]
 
+def get_invests(dataframe):
+    return dataframe.loc[dataframe["category"] == "Invest"]
+
+def get_saves(dataframe):
+    return dataframe.loc[dataframe["category"] == "Save"]
+

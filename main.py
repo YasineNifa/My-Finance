@@ -1,8 +1,13 @@
-from src.helper import get_date
+from src.helper import get_date, get_type_plot
 from src.logger import logger
 from src.transaction import add, get_transactions
-from src.plotter import pie_transaction, plot_transactions
+from src.plotter import pie_transaction, line_transactions
 
+
+FUNCTIONS = {
+    "line": line_transactions,
+    "pie": pie_transaction,
+}
 
 def main():
     while 1:
@@ -18,8 +23,10 @@ def main():
             start_date = get_date("Enter the start date in this format dd-mm-yyyy: ")
             end_date = get_date("Enter the end date in this format dd-mm-yyyy: ")
             df = get_transactions(start_date, end_date)
-            # plot_transactions(df)
-            pie_transaction(df)
+            if input("Do you want to see a plot? (y/n) ").lower() == "y":
+                type = get_type_plot()
+                print(f"Type: {type}")
+                FUNCTIONS[type](df)
 
         elif Input == "3":
             print("Exit the application")

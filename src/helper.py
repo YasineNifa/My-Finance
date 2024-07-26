@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src import CATEGORIES, DATE_FORMAT
+from src import CATEGORIES, DATE_FORMAT, PLOTS
 from src.logger import logger
 
 
@@ -37,3 +37,11 @@ def get_category():
 
 def get_description():
     return input("Enter a description (optional): ")
+
+def get_type_plot():
+    type = input("Enter the plot type (Pie or Line): ").lower()
+    if type in PLOTS:
+        return type
+
+    logger.error(f"Invalid type value. Please enter one of these values {PLOTS}")
+    return get_type_plot()
